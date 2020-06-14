@@ -1,8 +1,8 @@
 package main
 
 import (
+	"config"
 	"fmt"
-	"./config"
 )
 
 var BotID string
@@ -10,8 +10,8 @@ var goBot *discordGo.Session
 
 func main() {
 	err := config.ReadConfig()
-	if err != nil{
-		fmt Println(err.Error())
+	if err != nil {
+		fmt.Println(err.Error())
 		return err
 	}
 	Start()
@@ -19,9 +19,9 @@ func main() {
 	return
 }
 
-func Start(){
+func Start() {
 	goBot, err := discordgo.New("Bot " + config.Token)
-	
+
 	if err != nil {
 		fmt.Println(err.Error())
 		return
@@ -44,4 +44,15 @@ func Start(){
 		return
 	}
 	fmt.Println("Bot is running")
+}
+
+func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
+
+	if m.Auther.ID == BotID {
+		return
+	}
+
+	if m.Content == "ping" {
+		_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
+	}
 }
