@@ -38,5 +38,5 @@ func ReadConfig() error {
 
 	Token = config.Token
 	BotPrefix = config.BotPrefix
-	// Read
+	return nil
 }

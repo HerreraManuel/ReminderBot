@@ -2,10 +2,18 @@ package main
 
 import (
 	"fmt"
+	"./config"
 )
 
-const token string = "v"
+var BotID string
+var goBot *dsciordgo.Session
 
 func main() {
-	fmt.Println(token)
+	err := config.ReadConfig()
+	if err != nil{
+		fmt Println(err.Error())
+		return err
+	}
+	<-make(chan struct{})
+	return
 }
