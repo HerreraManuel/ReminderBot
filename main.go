@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/HerreraManuel/ReminderBot/config"
 	"github.com/bwmarrin/discordgo"
@@ -26,4 +29,13 @@ func main() {
 		fmt.Println("Error opening connection,", err)
 		return
 	}
+
+	// Let bot run and indicate to user how to exit
+	fmt.Println("Bot is running...Press CTRL+C to exit.")
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+	<-sc
+
+	// Close the discord session
+	dg.Close()
 }
