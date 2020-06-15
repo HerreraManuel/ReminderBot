@@ -7,36 +7,27 @@ import (
 )
 
 var (
-	Token     string
-	BotPrefix string
-
-	config *configStruct
+	Token string
+	BotPrefix
+	configItems *configStruct
 )
 
 type configStruct struct {
-	Token     string `json:"Token"`
-	BotPrefix string `json:"BotPrefix"`
+	Token     string
+	BotPrefix string
 }
 
-func ReadConfig() error {
-	fmt.Println("Reading config file...")
-	file, err := ioutil.ReadFile("./config.json")
-
+func ReadConfig() {
+	fmt.Println("Opening File...")
+	jsonFile, err := ioutil.ReadFile("config/config.json")
 	if err != nil {
-		fmt.Println(err.Error())
-		return err
+		fmt.Println("error:", err)
+	}
+	err = json.Unmarshal(jsonFile, &configItems)
+	if err != nil {
+		fmt.Println("error:", err)
 	}
 
-	fmt.Println(string(file))
-
-	err = json.Unmarshal(file, &config)
-
-	if err != nil {
-		fmt.Println(err.Error())
-		return err
-	}
-
-	Token = config.Token
-	BotPrefix = config.BotPrefix
-	return nil
+	fmt.Println("Token:", configItems.Token)
+	fmt.Println("BotPrefix:", configItems.BotPrefix)
 }
