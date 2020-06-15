@@ -6,9 +6,11 @@ import (
 	"io/ioutil"
 )
 
+// variables that will be stored
 var (
-	Token string
-	BotPrefix
+	Token     string
+	BotPrefix string
+
 	configItems *configStruct
 )
 
@@ -17,6 +19,8 @@ type configStruct struct {
 	BotPrefix string
 }
 
+// ReadConfig parses the json file to read and stored
+// the bot token and the prefix for the bot to respond
 func ReadConfig() {
 	fmt.Println("Opening File...")
 	jsonFile, err := ioutil.ReadFile("config/config.json")
@@ -28,6 +32,8 @@ func ReadConfig() {
 		fmt.Println("error:", err)
 	}
 
-	fmt.Println("Token:", configItems.Token)
-	fmt.Println("BotPrefix:", configItems.BotPrefix)
+	//fmt.Println("Token:", configItems.Token)
+	//fmt.Println("BotPrefix:", configItems.BotPrefix)
+
+	return
 }
