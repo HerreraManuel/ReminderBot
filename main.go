@@ -17,4 +17,13 @@ func main() {
 		return
 	}
 
+	// Register the message create func as a callback for MessageCreate events.
+	dg.AddHandler(messageCreate)
+
+	// Open websocket connection to Discord and begin listening
+	err = dg.Open()
+	if err != nil {
+		fmt.Println("Error opening connection,", err)
+		return
+	}
 }
