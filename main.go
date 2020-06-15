@@ -4,14 +4,17 @@ import (
 	"fmt"
 
 	"github.com/HerreraManuel/ReminderBot/config"
+	"github.com/bwmarrin/discordgo"
 )
 
 func main() {
-
 	config.ReadConfig()
 
-	fmt.Println("Token:", configItems.Token)
-
-	fmt.Println("ReminderBot is running...CTRL+C to exit")
+	// Creating discord session with parsed token
+	dg, err := discordgo.New("Bot " + config.Token)
+	if err != nil {
+		fmt.Println("Error creating discord session,", err)
+		return
+	}
 
 }

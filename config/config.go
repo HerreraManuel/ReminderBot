@@ -32,8 +32,9 @@ func ReadConfig() {
 		fmt.Println("error:", err)
 	}
 
-	//fmt.Println("Token:", configItems.Token)
-	//fmt.Println("BotPrefix:", configItems.BotPrefix)
+	// Assigning the parsed json
+	Token = configItems.Token
+	BotPrefix = configItems.BotPrefix
 
 	return
 }
