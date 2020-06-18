@@ -54,7 +54,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 		// TESTING WITH PING PONG
 		if m.Content == "!ping" {
-			s.ChannelMessageSend(m.ChannelID, "Pong!")
+			s.ChannelMessageSend(m.ChannelID, m.Author.Mention()+" Pong!")
 		}
 
 		if m.Content == "!pong" {
