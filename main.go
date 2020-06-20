@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+	"time"
 
 	"github.com/HerreraManuel/ReminderBot/config"
 	"github.com/bwmarrin/discordgo"
@@ -45,10 +46,8 @@ func main() {
 
 // Whenever a new message is receieved, this func will be called.
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-
 	// Bot checking if prefix is called
 	if strings.HasPrefix(m.Content, config.BotPrefix) {
-
 		// Ignore all messages created by the bot itself
 		if m.Author.ID == s.State.User.ID {
 			return
@@ -64,7 +63,13 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if m.Content == "!remind" {
-			s.ChannelMessageSend(m.ChannelID, m.Author.Mention()+"placeholder")
+
+		}
+
+		if m.Content == "!set" {
+			timer1 := time.NewTimer(5 * time.Second)
+			<-timer1.C
+			s.ChannelMessageSend(m.ChannelID, m.Author.Mention()+"Timer1 is fired!")
 		}
 	}
 }
