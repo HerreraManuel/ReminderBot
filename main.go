@@ -11,6 +11,8 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+var rem bool = false
+
 func main() {
 	config.ReadConfig()
 
@@ -62,7 +64,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if m.Content == "!remind" {
-			s.ChannelMessageSend(m.ChannelID, "placeholder")
+			s.ChannelMessageSend(m.ChannelID, m.Author.Mention()+"placeholder")
 		}
 	}
 }
